@@ -44,10 +44,3 @@ def send_sms_multi(phone_num_list, template_id, param_list):
     except HTTPError as e:
         response = {'result': 1000, 'errmsg': "网络异常发送失败"}
     return response
-
-
-if __name__ == '__main__':
-    result1 = send_sms_single("13600531993", 583698, [666, ])
-    print(result1)
-    result2 = send_sms_single(["13600531993", "13600531993", "13600531993", ], 583698, [999, ])
-    print(result2)
