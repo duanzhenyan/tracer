@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-        <div class="account">
+    <div class="account">
         <div class="title">用户注册</div>
         <form id="regForm" method="POST" novalidate>
             {% csrf_token %}
@@ -44,5 +44,31 @@
 {% endblock %}
 
 {% block js %}
-
+    <script>
+        //页面框架加载完成之后会自动执行的函数
+        $(function () {
+            BindClickBtnSms();
+        });
+        /*
+        点击获取验证码的按钮点击事件
+         */
+        function BindClickBtnSms() {
+            $('#btnSms').click(function () {
+                //获取用户输入的手机号
+                //找到输入框的ID，根据ID获取值
+                var mobilePhone = $('#id_mobile_phone').val();
+                console.log(mobilePhone);
+                $.ajax({
+                    url:'{% url 'send_sms' %}',
+                    type: 'GET',
+                    data:{
+                        'tpl': 're', 'phone': mobilePhone
+                    },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            })
+        }
+    </script>
 {% endblock %}
